@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#if [ "$EUID" -ne 0 ]
-#  then echo "Please run as root"
-#  exit 1
-#fi
-
 LIGHTCYAN='\033[0;36m'
 RED='\033[0;31m'
 NOCOLOR='\033[0m'
@@ -70,7 +65,7 @@ export PATH="$PATH:/opt/flutter/bin"
 flutter doctor
 
 #########Install Android Studio#########
-#prompt "Adnroid Studio" "https://flutter.dev/docs/get-started/install/linux" "android-studio*.tar.gz"
+prompt "Adnroid Studio" "https://flutter.dev/docs/get-started/install/linux" "android-studio*.tar.gz"
 
-#sudo tar xfv $file -C /opt/
-#sudo chown $(whoami) -R /opt/android-studio
+sudo tar xfv $file -C /opt/
+sudo chown $(whoami) -R /opt/android-studio

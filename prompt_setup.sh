@@ -191,6 +191,25 @@ tdd() {
 	mkdir test/features/$feature/domain/usecases
 }
 
+qemukvm() {
+	sudo apt-get install qemu-kvm virt-manager -y
+	#sudo service libvirtd start
+	#sudo update-rc.d libvirtd enable
+	#sudo adduser $(whoami) libvirtd
+	echo "Reboot Required !!!!!!!!!!"
+}
+
+cudatoolkit(){
+	echo "CUDA Toolkit 10.2......"
+	wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+	sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+	wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+	sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+	sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+	sudo apt-get update
+	sudo apt-get -y install cuda
+}
+
 ###################################################################################
 
 declare -a title
@@ -202,12 +221,18 @@ title[3]="MEAN stack: MongoDB - Express - AngularJS - Node.js
 "
 title[4]="Clean Architecture (Test Driven Development) 
 "
+title[5]="Virtulization: QEMU - KVM
+"
+title[6]="GPU API: CUDA Toolkit 10.2
+"
 
 declare -a module
 module[1]="module.android"
 module[2]="module.mern"
 module[3]="module.mean"
 module[4]="module.TDD"
+module[5]="module.vm"
+module[6]="module.cuda"
 
 module.android() {
 	vscode
@@ -233,6 +258,15 @@ module.mean() {
 module.TDD() {
 	tdd
 }
+
+module.vm() {
+	qemukvm
+}
+
+module.cuda() {
+	cudatoolkit
+}
+
 
 for i in "${!title[@]}"; do echo "$i) ${title[$i]}"; done
 
